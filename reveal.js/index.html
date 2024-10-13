@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Slide 1: Introduction to AI Pitch</h3>
+					<ul>
+						<li>Welcome to the AI Pitch presentation!</li>
+						<li>In this session, we will explore how to create a project using OpenAI's Realtime API capabilities.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Slide 2: What is OpenAI?</h3>
+					<ul>
+						<li>OpenAI is an AI research and deployment company.</li>
+						<li>Our mission is to ensure that artificial general intelligence benefits all of humanity.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Slide 3: Setting Up Your Project</h3>
+					<ul>
+						<li>To create an AI Pitch project, you need to:</li>
+						<li>Set up your environment.</li>
+						<li>Install necessary libraries.</li>
+						<li>Obtain API keys from OpenAI.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Slide 4: Using the Realtime API</h3>
+					<ul>
+						<li>The Realtime API allows you to interact with OpenAI's models in real-time.</li>
+						<li>Enables dynamic and responsive applications.</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			console.log('Initializing Reveal');
+
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+			console.log('Executing next slide');
+
+			// Set up SSE
+			const eventSource = new EventSource('http://localhost:3000/events');
+
+			eventSource.onmessage = function(event)
+			{
+				const command = event.data;
+				console.log('Received command:', command);
+				if (command.startsWith('slide'))
+				{
+					const slideNumber = command.split('/')[1];
+					console.log(`Executing slide ${slideNumber}`);
+					Reveal.slide(slideNumber - 1); // slide() uses zero-based index
+				}
+				else if (command === 'next')
+				{
+					// console.log(Reveal.getTotalSlides());
+
+					console.log('Executing next slide');
+					Reveal.next();
+				}
+				else if (command === 'prev')
+				{
+					console.log('Executing previous slide');
+					Reveal.prev();
+				}
+			};
+
+			eventSource.onerror = function(error)
+			{
+				console.error('EventSource failed:', error);
+				eventSource.close();
+			};
+		</script>
+	</body>
+</html>
