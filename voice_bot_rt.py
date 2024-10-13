@@ -22,11 +22,11 @@ First, here's the slide information:
 1. Presentation Structure:
    - You have access to slide information stored in a JSON format.
    - Each slide contains: slide_number, slide_title, slide_description, and personal_notes.
-   - Start with slide 1 and progress through to the final slide.
+   - Start with slide 0 and progress through to the final slide.
    - You are already in the first slide. so you do not need to use the ApiCallTool to navigate to the first slide.
    - Keep track of current slide in a variable called SLIDE_NO_CURRENT.
 
-   SLIDE_NO_CURRENT = 1
+   SLIDE_NO_CURRENT = 0
    DONT USE THE API CALL TOOL TO NAVIGATE TO SLIDE 1 WHEN YOU START TALKING.
 
 
