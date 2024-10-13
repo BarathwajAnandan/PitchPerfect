@@ -1,100 +1,203 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Slide Deck Presenter - Hackathon Project</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            color: #4CAF50;
+        }
+        p {
+            font-size: 1.5em;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        .btn {
+            position: fixed;
+            top: 50%;
+            background: rgba(76, 175, 80, 0.3);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: rgba(76, 175, 80, 0.6);
+        }
+        #prevBtn { left: 20px; }
+        #nextBtn { right: 20px; }
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: #4CAF50;
+            transition: width 0.3s;
+        }
+        .feature-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .feature-item {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .feature-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div id="slideContainer"></div>
+    <button id="prevBtn" class="btn">❮</button>
+    <button id="nextBtn" class="btn">❯</button>
+    <div class="progress-bar" id="progressBar"></div>
 
-		<title>reveal.js</title>
+    <script>
+        const slides = [
+            {
+                title: "Introducing AI Slide Deck Presenter",
+                content: "Revolutionize Your Presentations with Artificial Intelligence"
+            },
+            {
+                title: "The Problem",
+                content: "Traditional presentations can be monotonous and lack engagement. Presenters often struggle with delivery and timing."
+            },
+            {
+                title: "Our Solution",
+                content: "AI Slide Deck Presenter: An intelligent system that delivers your presentations with perfect timing, emphasis, and engagement."
+            },
+            {
+                title: "Key Features",
+                content: `
+                    <ul class="feature-list">
+                        <li class="feature-item">Natural Language Processing for dynamic speech</li>
+                        <li class="feature-item">Real-time audience engagement analysis</li>
+                        <li class="feature-item">Adaptive pacing based on content complexity</li>
+                        <li class="feature-item">Multi-language support</li>
+                        <li class="feature-item">Integration with popular presentation software</li>
+                    </ul>
+                `
+            },
+            {
+                title: "How It Works",
+                content: "1. Upload your slides<br>2. AI analyzes content and structure<br>3. Presentation is delivered with optimal pacing and emphasis<br>4. Real-time adjustments based on audience reaction"
+            },
+            {
+                title: "Benefits",
+                content: "✓ Consistent high-quality presentations<br>✓ Reduced presenter anxiety<br>✓ Increased audience engagement<br>✓ Time-saving for professionals<br>✓ Accessibility for non-native speakers"
+            },
+            {
+                title: "Market Potential",
+                content: "Targeting businesses, educators, and public speakers. Estimated market size: $5 billion by 2025."
+            },
+            {
+                title: "Future Developments",
+                content: "• VR/AR integration for immersive presentations<br>• AI-generated visual aids and graphics<br>• Personalized learning algorithms for audience members"
+            },
+            {
+                title: "Join the Presentation Revolution!",
+                content: "Experience the future of presentations with AI Slide Deck Presenter. Let's transform the way the world communicates ideas!"
+            }
+        ];
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+        let currentSlide = 0;
+        const slideContainer = document.getElementById('slideContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h3>Slide 1: Introduction to AI Pitch</h3>
-					<ul>
-						<li>Welcome to the AI Pitch presentation!</li>
-						<li>In this session, we will explore how to create a project using OpenAI's Realtime API capabilities.</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Slide 2: What is OpenAI?</h3>
-					<ul>
-						<li>OpenAI is an AI research and deployment company.</li>
-						<li>Our mission is to ensure that artificial general intelligence benefits all of humanity.</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Slide 3: Setting Up Your Project</h3>
-					<ul>
-						<li>To create an AI Pitch project, you need to:</li>
-						<li>Set up your environment.</li>
-						<li>Install necessary libraries.</li>
-						<li>Obtain API keys from OpenAI.</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Slide 4: Using the Realtime API</h3>
-					<ul>
-						<li>The Realtime API allows you to interact with OpenAI's models in real-time.</li>
-						<li>Enables dynamic and responsive applications.</li>
-					</ul>
-				</section>
-			</div>
-		</div>
+        function createSlideElement(slide, index) {
+            const slideElement = document.createElement('div');
+            slideElement.classList.add('slide');
+            slideElement.innerHTML = `
+                <h1>${slide.title}</h1>
+                <p>${slide.content}</p>
+            `;
+            if (index === 0) slideElement.classList.add('active');
+            return slideElement;
+        }
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			console.log('Initializing Reveal');
+        slides.forEach((slide, index) => {
+            slideContainer.appendChild(createSlideElement(slide, index));
+        });
 
-			Reveal.initialize({
-				hash: true,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
+        function updateSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            updateProgressBar();
+            if (currentSlide === 3) animateFeatures();
+        }
 
-			console.log('Executing next slide');
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
 
-			// Set up SSE
-			const eventSource = new EventSource('http://localhost:3000/events');
+        function animateFeatures() {
+            const features = document.querySelectorAll('.feature-item');
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.classList.add('visible');
+                }, index * 500);
+            });
+        }
 
-			eventSource.onmessage = function(event)
-			{
-				const command = event.data;
-				console.log('Received command:', command);
-				if (command.startsWith('slide'))
-				{
-					const slideNumber = command.split('/')[1];
-					console.log(`Executing slide ${slideNumber}`);
-					Reveal.slide(slideNumber - 1); // slide() uses zero-based index
-				}
-				else if (command === 'next')
-				{
-					// console.log(Reveal.getTotalSlides());
+        prevBtn.addEventListener('click', () => updateSlide(-1));
+        nextBtn.addEventListener('click', () => updateSlide(1));
 
-					console.log('Executing next slide');
-					Reveal.next();
-				}
-				else if (command === 'prev')
-				{
-					console.log('Executing previous slide');
-					Reveal.prev();
-				}
-			};
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') updateSlide(-1);
+            if (e.key === 'ArrowRight') updateSlide(1);
+        });
 
-			eventSource.onerror = function(error)
-			{
-				console.error('EventSource failed:', error);
-				eventSource.close();
-			};
-		</script>
-	</body>
+        updateProgressBar();
+    </script>
+</body>
 </html>
