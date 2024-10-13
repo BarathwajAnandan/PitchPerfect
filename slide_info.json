@@ -1,0 +1,65 @@
+{
+    "1": {
+        "slide_number": 1,
+        "slide_title": "Introducing AI Slide Deck Presenter",
+        "slide_description": "Revolutionize Your Presentations with Artificial Intelligence",
+        "slide_image": "slide1.png",
+        "personal_notes": "Emphasize the revolutionary aspect of AI in presentations."
+    },
+    "2": {
+        "slide_number": 2,
+        "slide_title": "The Problem",
+        "slide_description": "Traditional presentations can be monotonous and lack engagement. Presenters often struggle with delivery and timing.",
+        "slide_image": "slide2.png",
+        "personal_notes": "Highlight common pain points in traditional presentations."
+    },
+    "3": {
+        "slide_number": 3,
+        "slide_title": "Our Solution",
+        "slide_description": "AI Slide Deck Presenter: An intelligent system that delivers your presentations with perfect timing, emphasis, and engagement.",
+        "slide_image": "slide3.png",
+        "personal_notes": "Stress the intelligent and adaptive nature of the solution."
+    },
+    "4": {
+        "slide_number": 4,
+        "slide_title": "Key Features",
+        "slide_description": "Natural Language Processing for dynamic speech, Real-time audience engagement analysis, Adaptive pacing based on content complexity, Multi-language support, Integration with popular presentation software",
+        "slide_image": "slide4.png",
+        "personal_notes": "Explain each feature briefly and its benefit."
+    },
+    "5": {
+        "slide_number": 5,
+        "slide_title": "How It Works",
+        "slide_description": "1. Upload your slides 2. AI analyzes content and structure 3. Presentation is delivered with optimal pacing and emphasis 4. Real-time adjustments based on audience reaction",
+        "slide_image": "slide5.png",
+        "personal_notes": "Walk through the process step-by-step, emphasizing simplicity and effectiveness."
+    },
+    "6": {
+        "slide_number": 6,
+        "slide_title": "Benefits",
+        "slide_description": "Consistent high-quality presentations, Reduced presenter anxiety, Increased audience engagement, Time-saving for professionals, Accessibility for non-native speakers",
+        "slide_image": "slide6.png",
+        "personal_notes": "Highlight how each benefit addresses common presentation challenges."
+    },
+    "7": {
+        "slide_number": 7,
+        "slide_title": "Market Potential",
+        "slide_description": "Targeting businesses, educators, and public speakers. Estimated market size: $5 billion by 2025.",
+        "slide_image": "slide7.png",
+        "personal_notes": "Emphasize the vast market opportunity and growth potential."
+    },
+    "8": {
+        "slide_number": 8,
+        "slide_title": "Future Developments",
+        "slide_description": "VR/AR integration for immersive presentations, AI-generated visual aids and graphics, Personalized learning algorithms for audience members",
+        "slide_image": "slide8.png",
+        "personal_notes": "Paint an exciting picture of future possibilities and continuous innovation."
+    },
+    "9": {
+        "slide_number": 9,
+        "slide_title": "Join the Presentation Revolution!",
+        "slide_description": "Experience the future of presentations with AI Slide Deck Presenter. Let's transform the way the world communicates ideas!",
+        "slide_image": "slide9.png",
+        "personal_notes": "End with a strong call-to-action and vision for the future of presentations."
+    }
+}
